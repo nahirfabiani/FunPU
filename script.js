@@ -10,6 +10,8 @@ let isDeleting = false;
 
 function typeWriter() {
     const typedTextElement = document.getElementById('typed-text');
+    if (!typedTextElement) return;
+    
     const currentText = sentences[currentSentence];
     
     if (!isDeleting) {
@@ -71,9 +73,11 @@ function initMobileMenu() {
 // Carousel functionality
 function initCarousel() {
     const track = document.getElementById('carouselTrack');
-    const items = document.querySelectorAll('.carousel-item');
+    const items = document.querySelectorAll('#carouselTrack .carousel-item');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
+    
+    if (!track || !items.length || !prevBtn || !nextBtn) return;
     
     let currentIndex = 0;
     let autoSlideInterval;
@@ -152,6 +156,8 @@ function initDocCarousel() {
     const items = document.querySelectorAll('#docCarouselTrack .carousel-item');
     const prevBtn = document.getElementById('docPrevBtn');
     const nextBtn = document.getElementById('docNextBtn');
+    
+    if (!track || !items.length || !prevBtn || !nextBtn) return;
     
     let currentIndex = 0;
     let autoSlideInterval;
