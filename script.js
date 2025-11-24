@@ -42,9 +42,33 @@ function typeWriter() {
     setTimeout(typeWriter, speed);
 }
 
+// Page title typewriter effect
+function pageTypeWriter() {
+    const titleElement = document.querySelector('.page-title');
+    if (!titleElement) return;
+    
+    const text = titleElement.getAttribute('data-text');
+    titleElement.textContent = '';
+    
+    let i = 0;
+    function type() {
+        if (i < text.length) {
+            titleElement.textContent += text.charAt(i);
+            i++;
+            setTimeout(type, 100);
+        }
+    }
+    
+    setTimeout(type, 300);
+}
+
 // Iniciar el efecto cuando se carga la página
 document.addEventListener('DOMContentLoaded', function() {
-    setTimeout(typeWriter, 500);
+    if (document.getElementById('typed-text')) {
+        setTimeout(typeWriter, 500);
+    } else {
+        pageTypeWriter();
+    }
     initCarousel();
     initDocCarousel();
     initMobileMenu();
