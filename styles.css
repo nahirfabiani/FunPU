@@ -104,6 +104,8 @@ p, span, a, li, button {
     display: flex;
     list-style: none;
     gap: 2rem;
+    margin-left: auto;
+    margin-right: 150px;
 }
 
 .nav-menu a {
@@ -765,6 +767,74 @@ p, span, a, li, button {
     border-radius: 50%;
 }
 
+/* Carousel Styles */
+.carousel-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.carousel-wrapper {
+    flex: 1;
+    overflow: hidden;
+    border-radius: 0;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease;
+    gap: 2rem;
+}
+
+.carousel-item {
+    flex: 0 0 calc(33.333% - 1.33rem);
+    transition: all 0.3s ease;
+    transform: scale(0.9);
+    opacity: 0.7;
+}
+
+.carousel-item.active {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.carousel-btn {
+    width: 50px;
+    height: 50px;
+    background: #6DC61F;
+    color: white;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.carousel-btn:hover {
+    background: #5ba91a;
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .carousel-item {
+        flex: 0 0 100%;
+    }
+    
+    .carousel-container {
+        gap: 1rem;
+    }
+    
+    .carousel-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+    }
+}
+
 .documents {
     padding: 100px 0;
     background: #FCFCFC;
@@ -1060,7 +1130,7 @@ p, span, a, li, button {
     }
 }
 
-/* Navbar font size for non-index pages */
-body:not(.index-page) .nav-menu a {
-    font-size: 0.591rem;
+/* Navbar font size for all pages */
+.nav-menu a {
+    font-size: 0.65rem;
 }

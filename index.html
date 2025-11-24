@@ -14,12 +14,14 @@
         <nav class="nav">
             <div class="nav-container">
                 <div class="nav-logo">
-                    <img src="img/Isologo.jpeg" alt="Progreso Urbano Logo" class="logo-img">
+                    <a href="index.html"><img src="img/Isologo.jpeg" alt="Progreso Urbano Logo" class="logo-img"></a>
+                    <span class="logo-text">Progreso Urbano</span>
                 </div>
                 <ul class="nav-menu">
-                    <li><a href="#quienes-somos">Quiénes Somos</a></li>
-                    <li><a href="#ejes-trabajo">Ejes de Trabajo</a></li>
-                    <li><a href="#agendas-prioritarias">Agendas Prioritarias</a></li>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="quienes-somos.html">Quiénes Somos</a></li>
+                    <li><a href="ejes-trabajo.html">Ejes de Trabajo</a></li>
+                    <li><a href="agendas-prioritarias.html">Agendas Prioritarias</a></li>
                     <li><a href="novedades.html">Novedades</a></li>
                     <li><a href="documentos.html">Documentos</a></li>
                 </ul>
@@ -38,7 +40,7 @@
     <main>
         <section id="inicio" class="hero">
             <div class="hero-text">
-                <h1>"Modernizar la democracia,<br>humanizar las ciudades,<br>impulsar el Progreso Urbano"</h1>
+                <h1 id="typewriter">"<span id="typed-text"></span>"</h1>
             </div>
             <div class="hero-button">
                 <button class="cta-button">Conocer más</button>
@@ -128,49 +130,53 @@
         <section id="novedades" class="news">
             <div class="container">
                 <h2>Novedades</h2>
-                <div class="news-grid">
-                    <article class="news-item">
-                        <div class="news-image">
-                            <img src="img/conferencia-urbanismo.jpg.png" alt="Nueva Alianza para Ciudades Sostenibles">
+                <div class="carousel-container">
+                    <button class="carousel-btn prev-btn" id="prevBtn">‹</button>
+                    <div class="carousel-wrapper">
+                        <div class="carousel-track" id="carouselTrack">
+                            <article class="news-item carousel-item active">
+                                <div class="news-image">
+                                    <img src="img/conferencia-urbanismo.jpg.png" alt="Nueva Alianza para Ciudades Sostenibles">
+                                </div>
+                                <div class="news-content">
+                                    <h3>Nueva Alianza para Ciudades Sostenibles</h3>
+                                    <p>Firmamos un acuerdo estratégico para promover el desarrollo urbano sostenible en América Latina.</p>
+                                    <span class="news-date">15 de Marzo, 2024</span>
+                                </div>
+                            </article>
+                            <article class="news-item carousel-item">
+                                <div class="news-image">
+                                    <img src="img/alianza-sostenible.jpg.png" alt="Proyecto Smart City en Buenos Aires">
+                                </div>
+                                <div class="news-content">
+                                    <h3>Proyecto Smart City en Buenos Aires</h3>
+                                    <p>Iniciamos la implementación de tecnologías inteligentes en el centro de la ciudad.</p>
+                                    <span class="news-date">8 de Marzo, 2024</span>
+                                </div>
+                            </article>
+                            <article class="news-item carousel-item">
+                                <div class="news-image">
+                                    <img src="img/alianza-sostenible.jpg.png" alt="Conferencia Internacional de Urbanismo">
+                                </div>
+                                <div class="news-content">
+                                    <h3>Conferencia Internacional de Urbanismo</h3>
+                                    <p>Participamos como ponentes principales en el evento más importante del sector.</p>
+                                    <span class="news-date">1 de Marzo, 2024</span>
+                                </div>
+                            </article>
+                            <article class="news-item carousel-item">
+                                <div class="news-image">
+                                    <img src="img/conferencia-urbanismo.jpg.png" alt="Premio Innovación Urbana">
+                                </div>
+                                <div class="news-content">
+                                    <h3>Premio Innovación Urbana</h3>
+                                    <p>Reconocimiento por nuestro proyecto de revitalización del centro histórico de Salta.</p>
+                                    <span class="news-date">22 de Febrero, 2024</span>
+                                </div>
+                            </article>
                         </div>
-                        <div class="news-content">
-                            <h3>Nueva Alianza para Ciudades Sostenibles</h3>
-                            <p>Firmamos un acuerdo estratégico para promover el desarrollo urbano sostenible en América Latina.</p>
-                            <span class="news-date">15 de Marzo, 2024</span>
-                        </div>
-                    </article>
-                    <article class="news-item">
-                        <div class="news-image">
-                            <img src="img/alianza-sostenible.jpg.png" alt="Proyecto Smart City en Buenos Aires">
-                        </div>
-                        <div class="news-content">
-                            <h3>Proyecto Smart City en Buenos Aires</h3>
-                            <p>Iniciamos la implementación de tecnologías inteligentes en el centro de la ciudad.</p>
-                            <span class="news-date">8 de Marzo, 2024</span>
-                        </div>
-                    </article>
-                     <!-- PARA AGREGAR NOTICIA
-                    <article class="news-item">
-                        <div class="news-image">
-                            <img src="img/nombre-imagen.jpg" alt="Título de la noticia">
-                        </div>
-                        <div class="news-content">
-                            <h3>Título de la noticia</h3>
-                            <p>Descripción de la noticia.</p>
-                            <span class="news-date">Fecha</span>
-                        </div>
-                    </article>
-                    -->
-                    <article class="news-item">
-                        <div class="news-image">
-                            <img src="img/alianza-sostenible.jpg.png" alt="Conferencia Internacional de Urbanismo">
-                        </div>
-                        <div class="news-content">
-                            <h3>Conferencia Internacional de Urbanismo</h3>
-                            <p>Participamos como ponentes principales en el evento más importante del sector.</p>
-                            <span class="news-date">1 de Marzo, 2024</span>
-                        </div>
-                    </article>
+                    </div>
+                    <button class="carousel-btn next-btn" id="nextBtn">›</button>
                 </div>
                 <div class="section-button">
                     <a href="novedades.html" class="see-more-btn">Ver más</a>
@@ -181,48 +187,51 @@
         <section id="documentos" class="documents">
             <div class="container">
                 <h2>Documentos</h2>
-                <div class="documents-grid">
-
-                  <!---PARA AGREGAR DOC
-    <div class="document-item">
-    <div class="doc-icon">
-    <i class="fas fa-file-pdf"></i>
-    </div>
-    <h3>Nombre del Documento</h3>
-    <p>Descripción del documento.</p>
-    <a href="documents/nombre-archivo.pdf" class="doc-download" download>Descargar PDF</a>
-    </div>
---->
-                    <div class="document-item">
-                        <div class="doc-icon">
-                            <i class="fas fa-file-pdf"></i>
+                <div class="carousel-container">
+                    <button class="carousel-btn prev-btn" id="docPrevBtn">‹</button>
+                    <div class="carousel-wrapper">
+                        <div class="carousel-track" id="docCarouselTrack">
+                            <div class="document-item carousel-item active">
+                                <div class="doc-icon">
+                                    <i class="fas fa-file-pdf"></i>
+                                </div>
+                                <h3>Guía de Planificación Urbana Sostenible</h3>
+                                <p>Manual completo para el desarrollo de ciudades sostenibles.</p>
+                                <a href="documents/guia-planificacion-urbana.pdf" class="doc-download" download>Descargar PDF</a>
+                            </div>
+                            <div class="document-item carousel-item">
+                                <div class="doc-icon">
+                                    <i class="fas fa-file-alt"></i>
+                                </div>
+                                <h3>Informe Anual 2023</h3>
+                                <p>Resumen de nuestros proyectos y logros del año anterior.</p>
+                                <a href="documents/informe-anual-2023.pdf" class="doc-download" download>Descargar PDF</a>
+                            </div>
+                            <div class="document-item carousel-item">
+                                <div class="doc-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <h3>Estudio de Impacto Urbano</h3>
+                                <p>Análisis detallado del impacto de nuestras intervenciones urbanas.</p>
+                                <a href="documents/estudio-impacto-urbano.pdf" class="doc-download" download>Descargar PDF</a>
+                            </div>
+                            <div class="document-item carousel-item">
+                                <div class="doc-icon">
+                                    <i class="fas fa-book"></i>
+                                </div>
+                                <h3>Manual de Movilidad Sostenible</h3>
+                                <p>Estrategias para implementar sistemas de transporte urbano eficiente.</p>
+                                <a href="documents/manual-movilidad.pdf" class="doc-download" download>Descargar PDF</a>
+                            </div>
                         </div>
-                        <h3>Guía de Planificación Urbana Sostenible</h3>
-                        <p>Manual completo para el desarrollo de ciudades sostenibles.</p>
-                        <a href="documents/guia-planificacion-urbana.pdf" class="doc-download" download>Descargar PDF</a>
                     </div>
-                    <div class="document-item">
-                        <div class="doc-icon">
-                            <i class="fas fa-file-alt"></i>
-                        </div>
-                        <h3>Informe Anual 2023</h3>
-                        <p>Resumen de nuestros proyectos y logros del año anterior.</p>
-                        <a href="documents/informe-anual-2023.pdf" class="doc-download" download>Descargar PDF</a>
-                    </div>
-                    <div class="document-item">
-                        <div class="doc-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <h3>Estudio de Impacto Urbano</h3>
-                        <p>Análisis detallado del impacto de nuestras intervenciones urbanas.</p>
-                        <a href="documents/estudio-impacto-urbano.pdf" class="doc-download" download>Descargar PDF</a>
-                    </div>
+                    <button class="carousel-btn next-btn" id="docNextBtn">›</button>
                 </div>
                 <div class="section-button">
                     <a href="documentos.html" class="see-more-btn">Ver más</a>
                 </div>
             </div>
-        </section>
+        </section> 
     </main>
 
     <footer id="contacto" class="footer">

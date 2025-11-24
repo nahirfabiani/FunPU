@@ -1,77 +1,213 @@
-// Mobile Navigation Toggle
-const navToggle = document.querySelector('.nav-toggle');
-const navMenu = document.querySelector('.nav-menu');
+const sentences = [
+    "Modernizar la democracia",
+    "Humanizar las ciudades", 
+    "Impulsar el Progreso Urbano"
+];
 
-navToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
+let currentSentence = 0;
+let currentChar = 0;
+let isDeleting = false;
+
+function typeWriter() {
+    const typedTextElement = document.getElementById('typed-text');
+    const currentText = sentences[currentSentence];
+    
+    if (!isDeleting) {
+        // Escribir
+        typedTextElement.textContent = currentText.substring(0, currentChar + 1);
+        currentChar++;
+        
+        if (currentChar === currentText.length) {
+            // Pausa antes de empezar a borrar
+            setTimeout(() => {
+                isDeleting = true;
+                typeWriter();
+            }, 2000);
+            return;
+        }
+    } else {
+        // Borrar
+        typedTextElement.textContent = currentText.substring(0, currentChar - 1);
+        currentChar--;
+        
+        if (currentChar === 0) {
+            isDeleting = false;
+            currentSentence = (currentSentence + 1) % sentences.length;
+        }
+    }
+    
+    const speed = isDeleting ? 50 : 100;
+    setTimeout(typeWriter, speed);
+}
+
+// Iniciar el efecto cuando se carga la página
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(typeWriter, 500);
+    initCarousel();
+    initDocCarousel();
+    initMobileMenu();
 });
 
-// Close mobile menu when clicking on a link
-document.querySelectorAll('.nav-menu a').forEach(link => {
-    link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-    });
-});
+// Mobile menu functionality
+function initMobileMenu() {
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    
+    if (navToggle && navMenu) {
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+        
+        // Close menu when clicking on a link
+        const navLinks = document.querySelectorAll('.nav-menu a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+    }
+}
 
-// Smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
+// Carousel functionality
+function initCarousel() {
+    const track = document.getElementById('carouselTrack');
+    const items = document.querySelectorAll('.carousel-item');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    
+    let currentIndex = 0;
+    let autoSlideInterval;
+    
+    function updateCarousel() {
+        const itemWidth = items[0].offsetWidth + 32; // width + gap
+        const isMobile = window.innerWidth <= 768;
+        
+        if (isMobile) {
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            // In mobile, current item is active
+            items.forEach((item, index) => {
+                item.classList.toggle('active', index === currentIndex);
+            });
+        } else {
+            // Center the current item by offsetting by one item width
+            track.style.transform = `translateX(-${(currentIndex - 1) * itemWidth}px)`;
+            // Middle item (index 1 in visible set) is active
+            items.forEach((item, index) => {
+                item.classList.toggle('active', index === currentIndex);
             });
         }
-    });
-});
-
-// Header background on scroll
-window.addEventListener('scroll', () => {
-    const header = document.querySelector('.header');
-    if (window.scrollY > 100) {
-        header.style.background = 'rgba(0, 26, 72, 0.98)';
-    } else {
-        header.style.background = 'rgba(0, 26, 72, 0.95)';
     }
-});
-
-// Intersection Observer for animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
+    
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % items.length;
+        updateCarousel();
+    }
+    
+    function prevSlide() {
+        currentIndex = (currentIndex - 1 + items.length) % items.length;
+        updateCarousel();
+    }
+    
+    // Event listeners
+    nextBtn.addEventListener('click', nextSlide);
+    prevBtn.addEventListener('click', prevSlide);
+    
+    // Touch/swipe support
+    let startX = 0;
+    let isDragging = false;
+    
+    track.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        isDragging = true;
+    });
+    
+    track.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+    });
+    
+    track.addEventListener('touchend', (e) => {
+        if (!isDragging) return;
+        isDragging = false;
+        
+        const endX = e.changedTouches[0].clientX;
+        const diff = startX - endX;
+        
+        if (Math.abs(diff) > 50) {
+            if (diff > 0) {
+                nextSlide();
+            } else {
+                prevSlide();
+            }
         }
     });
-}, observerOptions);
+    
+    // Handle window resize
+    window.addEventListener('resize', updateCarousel);
+}
 
-// Observe elements for animation
-document.querySelectorAll('.project-card, .stat').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(el);
-});
-
-// CTA Button click handler
-document.querySelector('.cta-button').addEventListener('click', () => {
-    document.querySelector('#proyectos').scrollIntoView({
-        behavior: 'smooth'
+// Documents Carousel functionality
+function initDocCarousel() {
+    const track = document.getElementById('docCarouselTrack');
+    const items = document.querySelectorAll('#docCarouselTrack .carousel-item');
+    const prevBtn = document.getElementById('docPrevBtn');
+    const nextBtn = document.getElementById('docNextBtn');
+    
+    let currentIndex = 0;
+    let autoSlideInterval;
+    
+    function updateCarousel() {
+        const itemWidth = items[0].offsetWidth + 32;
+        const isMobile = window.innerWidth <= 768;
+        
+        if (isMobile) {
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+        } else {
+            track.style.transform = `translateX(-${(currentIndex - 1) * itemWidth}px)`;
+        }
+        
+        items.forEach((item, index) => {
+            item.classList.toggle('active', index === currentIndex);
+        });
+    }
+    
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % items.length;
+        updateCarousel();
+    }
+    
+    function prevSlide() {
+        currentIndex = (currentIndex - 1 + items.length) % items.length;
+        updateCarousel();
+    }
+    
+    nextBtn.addEventListener('click', nextSlide);
+    prevBtn.addEventListener('click', prevSlide);
+    
+    // Touch support
+    let startX = 0;
+    let isDragging = false;
+    
+    track.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        isDragging = true;
     });
-});
-
-// Add loading animation
-window.addEventListener('load', () => {
-    document.body.style.opacity = '1';
-});
-
-// Initialize
-document.body.style.opacity = '0';
-document.body.style.transition = 'opacity 0.3s ease';
+    
+    track.addEventListener('touchend', (e) => {
+        if (!isDragging) return;
+        isDragging = false;
+        
+        
+        const endX = e.changedTouches[0].clientX;
+        const diff = startX - endX;
+        
+        if (Math.abs(diff) > 50) {
+            if (diff > 0) {
+                nextSlide();
+            } else {
+                prevSlide();
+            }
+        }
+    });
+    window.addEventListener('resize', updateCarousel);
+}
